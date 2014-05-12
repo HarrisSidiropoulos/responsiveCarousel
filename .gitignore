@@ -1,0 +1,10 @@
+.DS_Store
+.idea
+*.idea
+.idea/workspace.xml
+*.idea/workspace.xml
+
+.sass-cache
+
+node_modules
+demos/assets/libs

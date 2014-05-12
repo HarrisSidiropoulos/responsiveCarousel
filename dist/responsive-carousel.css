@@ -1,0 +1,38 @@
+.carousel-media-control {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -48px;
+  margin-top: -48px; }
+  .carousel-media-control a {
+    display: block;
+    width: 96px;
+    height: 96px;
+    padding: 32px;
+    background-color: #666;
+    border-radius: 48px;
+    font-size: 26px;
+    color: #FFF; }
+    .carousel-media-control a .glyphicon {
+      margin-left: 4px; }
+
+.carousel-media-control a:hover {
+  background-color: #333; }
+
+.carousel-media {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%; }
+
+.carousel-video-playing .carousel-media-control, .carousel-video-playing .carousel-indicators {
+  display: none; }
+.carousel-video-playing .carousel-control {
+  bottom: 50px;
+  background: none;
+  opacity: 0; }
+  .carousel-video-playing .carousel-control .glyphicon {
+    padding-top: 25px; }
+.carousel-video-playing:hover .carousel-control {
+  opacity: .5; }
