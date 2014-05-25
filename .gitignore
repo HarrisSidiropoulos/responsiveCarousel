@@ -7,4 +7,5 @@
 .sass-cache
 
 node_modules
-demos/assets/libs
+bower_components
+builds

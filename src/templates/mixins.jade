@@ -1,0 +1,40 @@
+mixin carousel(images, options)
+  - options = options || {};
+  - autoplay = options.autoplay || "false";
+  - loadNextPrevious = options.loadNextPrevious || "true"
+  - imgStretch = options.imgStretch || "true"
+  - backgroundScale = options.backgroundScale || ""
+  - scaleBackgroundProportionally = options.scaleBackgroundProportionally || "true"
+
+  div.carousel.slide(
+    data-ride="responsive-carousel",
+    data-autoplay=autoplay,
+    data-load-next-previous=loadNextPrevious,
+    data-background-scale=backgroundScale,
+    data-scale-background-proportionally=scaleBackgroundProportionally,
+    data-img-stretch=imgStretch
+  )
+    - if (images.length>1)
+      ol.carousel-indicators
+        each val, index in images
+          - var active = index==0 ? "active" : ""
+          li(class=active, data-slide-to=index)
+
+    div.carousel-inner
+      each img, index in images
+        - var active = index==0 ? "active" : ""
+        div.item(class=active)
+          - if (img.mediaSrc)
+            div.carousel-media-control
+              a(href="#", data-media-type="vimeo", data-media-src=img.mediaSrc)
+                span.glyphicon.glyphicon-play
+          img(data-src=img.src,
+              data-md-src=img.mdSrc?img.mdSrc:"",
+              data-sm-src=img.smSrc?img.smSrc:"",
+              data-xs-src=img.xsSrc?img.xsSrc:"")
+
+    - if (images.length>1)
+      a.left.carousel-control(href="#", data-slide="prev")
+        span.glyphicon.glyphicon-chevron-left
+      a.right.carousel-control(href="#", data-slide="next")
+        span.glyphicon.glyphicon-chevron-right
