@@ -37,5 +37,5 @@
   },
   "scripts": {
     "test": "gulp"
-  },
+  }
 }
