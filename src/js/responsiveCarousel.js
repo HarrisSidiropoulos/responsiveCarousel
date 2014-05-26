@@ -134,8 +134,23 @@ require("bootstrapify");
         }
         startImageLoading(img);
       }
+      function preload(img) {
+        img.parent().addClass("loading");
+        var src = getImageSrc(img);
+        var tempImage = $('<img/>');
+        tempImage.attr("src", src);
 
+        tempImage.load(function () {
+          requestAnimFrame(function() {
+            displayImage(img);
+          });
+        });
+      }
       function startImageLoading(img) {
+        preload(img);
+      }
+
+      function displayImage(img) {
         var src = getImageSrc(img);
         if (img.attr("src")===src && !backgroundScale) return;
         if (img.parent().data("src") === src && backgroundScale) return;
@@ -156,7 +171,6 @@ require("bootstrapify");
           img.parent().removeClass("loading");
           setImageDimensionsOnLoad(img);
         });
-
       }
 
       function getImageSrc(img) {
