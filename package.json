@@ -17,7 +17,11 @@
   "files": [
     "src/js"
   ],
-  "keywords": ["carousel", "bootstrap", "responsive"],
+  "keywords": [
+    "carousel",
+    "bootstrap",
+    "responsive"
+  ],
   "devDependencies": {
     "gulp": "~3.6.2",
     "gulp-jade": "~0.5.0",
@@ -29,11 +33,11 @@
     "gulp-livereload": "~1.5.0"
   },
   "dependencies": {
-    "jquery": "~2.1.1",
-    "modernizrify": "git://github.com/HarrisSidiropoulos/modernizrify",
     "animationevents": "git://github.com/HarrisSidiropoulos/animationevents",
     "animationframe": "git://github.com/HarrisSidiropoulos/animationframe",
-    "bootstrapify": "git://github.com/HarrisSidiropoulos/Bootstrapify"
+    "bootstrapify": "git://github.com/HarrisSidiropoulos/Bootstrapify",
+    "jquery": "~2.1.1",
+    "modernizrify": "git://github.com/HarrisSidiropoulos/modernizrify"
   },
   "scripts": {
     "test": "gulp"

@@ -7,7 +7,8 @@ html
     link(rel="stylesheet", href="assets/css/main.css")
 
   body
-    +carousel(
+    .container
+      +carousel(
       [
         { mediaSrc: "//player.vimeo.com/video/91090531", src: "//dummyimage.com/1200x400/787678/fff", mdSrc:"//dummyimage.com/992x331/787678/fff", smSrc:"//dummyimage.com/768x256/787678/fff", xsSrc:"//dummyimage.com/480x160/787678/fff" },
         { src: "//dummyimage.com/1200x400/787678/fff", mdSrc:"//dummyimage.com/992x331/787678/fff", smSrc:"//dummyimage.com/768x256/787678/fff", xsSrc:"//dummyimage.com/480x160/787678/fff" },
@@ -15,7 +16,7 @@ html
         { src: "//dummyimage.com/1200x400/787678/fff", mdSrc:"//dummyimage.com/992x331/787678/fff", smSrc:"//dummyimage.com/768x256/787678/fff", xsSrc:"//dummyimage.com/480x160/787678/fff" },
       ],
       {
-        backgroundScale: "cover"
+        //backgroundScale: "cover",
         //backgroundScale: "contain",
         //scaleBackgroundProportionally: "false"
       }

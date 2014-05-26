@@ -3,7 +3,6 @@
  */
 var $ = require("jquery"),
   requestAnimFrame = require("animationframe");
-
 require("bootstrapify");
 
 (function ($) {
@@ -121,8 +120,11 @@ require("bootstrapify");
 
           loadImage(img);
           if (loadNextPrevious) {
-            loadImage($(imageItems[nextIndex]));
-            loadImage($(imageItems[previousIndex]));
+            var nextImage = $(imageItems[nextIndex]),
+                previousImage = $(imageItems[previousIndex]);
+
+            loadImage(nextImage);
+            loadImage(previousImage);
           }
           $this.responsiveCarouselStopAllVideo();
         });
@@ -157,15 +159,16 @@ require("bootstrapify");
         if (img.parent().data("src") === src && backgroundScale) return;
 
         if (backgroundScale) {
-          img.css("opacity", 0);
+          img.css("display", "none");
           img.parent().css("backgroundPosition", "center");
           img.parent().css("backgroundImage", "url("+src+")");
           img.parent().css("backgroundRepeat", "no-repeat");
           img.parent().css("background-size", backgroundScale);
           img.parent().data("src", src);
           if ($this.height()>0) return;
+        } else {
+          img.css("display", "block");
         }
-
         img.parent().addClass("loading");
         img.attr("src", src);
         img.load(function () {
