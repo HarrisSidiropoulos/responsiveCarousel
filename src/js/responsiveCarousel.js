@@ -141,6 +141,7 @@ require("bootstrapify");
         tempImage.attr("src", src);
 
         tempImage.load(function () {
+          img.parent().removeClass("loading");
           requestAnimFrame(function() {
             displayImage(img);
           });
