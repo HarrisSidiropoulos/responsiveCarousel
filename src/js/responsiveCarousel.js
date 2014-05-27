@@ -70,7 +70,6 @@ require("bootstrapify");
 
       var element = hammerjs($this.get()[0]);
       element.on("drag swipe swiperight swipeleft", function(event) {
-        console.log(event.type);
         if (event.type == "swipeleft") {
           $this.carousel("next");
         } else if (event.type == "swiperight") {
