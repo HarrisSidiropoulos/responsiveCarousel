@@ -15,7 +15,8 @@
   },
   "license": "MIT",
   "files": [
-    "src/js"
+    "src/js",
+    "src/sass"
   ],
   "keywords": [
     "carousel",
@@ -40,6 +41,6 @@
     "modernizrify": "git://github.com/HarrisSidiropoulos/modernizrify"
   },
   "scripts": {
-    "test": "gulp"
+    "demo": "gulp"
   }
 }
