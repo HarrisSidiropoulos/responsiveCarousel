@@ -1,9 +1,9 @@
 # responsiveCarousel [![Build Status](https://secure.travis-ci.org/HarrisSidiropoulos/responsiveCarousel.png?branch=master)](http://travis-ci.org/HarrisSidiropoulos/responsiveCarousel)
 
-Extending Bootstarp Carousel to work with responsive images
+Extending Bootstarp Carousel to work with responsive images and video from vimeo.
 
 ## Getting Started
-Install the module with: `npm install responsiveCarousel`
+Install the module with: `npm install HarrisSidiropoulos/responsiveCarousel`
 
 ```javascript
 require('responsiveCarousel');

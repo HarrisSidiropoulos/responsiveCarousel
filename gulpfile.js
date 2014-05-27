@@ -15,11 +15,11 @@ var env = process.env.NODE_ENV || DEVELOPMENT;
 if (env!==DEVELOPMENT) env = PRODUCTION;
 
 var buildPath = env;
-    outputDir = "builds/"+buildPath,
+    outputDir = "demo/"+buildPath,
     assets= "/assets";
 
 gulp.task('jade', function() {
-  return gulp.src("src/templates/**/*.jade")
+  return gulp.src("src/templates/**/index.jade")
     .pipe(jade())
     .pipe(gulp.dest(outputDir));
 });
@@ -58,7 +58,7 @@ gulp.task('watch', function() {
   gulp.watch('src/js/**/*.js', ['js']);
   gulp.watch('src/sass/**/*.scss', ['sass']);
   var server = livereload();
-  gulp.watch('builds/**').on('change', function(file) {
+  gulp.watch('demo/**').on('change', function(file) {
     server.changed(file.path);
   });
 });
