@@ -5,25 +5,23 @@ html
     title Hallo World!
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link(rel="stylesheet", href="assets/css/main.css")
-
-  body
+   body
     .container
+      - var width = 1140, height = 600;
+      - var maxWidth = 992, ratio=maxWidth/width, mdWidth = Math.round(width * ratio), mdHeight = Math.round(height * ratio);
+      - var maxWidth = 768, ratio=maxWidth/width, smWidth = Math.round(width * ratio), smHeight = Math.round(height * ratio);
+      - var maxWidth = 480, ratio=maxWidth/width, xsWidth = Math.round(width * ratio), xsHeight = Math.round(height * ratio);
       +carousel(
-      [
-        { mediaSrc: "//player.vimeo.com/video/91090531", src: "//dummyimage.com/1200x400/787678/fff", mdSrc:"//dummyimage.com/992x331/787678/fff", smSrc:"//dummyimage.com/768x256/787678/fff", xsSrc:"//dummyimage.com/480x160/787678/fff" },
-        { src: "//dummyimage.com/1200x400/787678/fff", mdSrc:"//dummyimage.com/992x331/787678/fff", smSrc:"//dummyimage.com/768x256/787678/fff", xsSrc:"//dummyimage.com/480x160/787678/fff" },
-        { src: "//dummyimage.com/1200x400/787678/fff", mdSrc:"//dummyimage.com/992x331/787678/fff", smSrc:"//dummyimage.com/768x256/787678/fff", xsSrc:"//dummyimage.com/480x160/787678/fff" },
-        { src: "//dummyimage.com/1200x400/787678/fff", mdSrc:"//dummyimage.com/992x331/787678/fff", smSrc:"//dummyimage.com/768x256/787678/fff", xsSrc:"//dummyimage.com/480x160/787678/fff" },
-      ],
-      {
-        //backgroundScale: "cover",
-        //backgroundScale: "contain",
-        //scaleBackgroundProportionally: "false"
-      }
-    )
-    //
-      br
-      p Carousel with on media
-      +carousel([{ src: "//dummyimage.com/1024x400/787678/fff", mediaSrc: "//player.vimeo.com/video/91090531", xsSrc:"//dummyimage.com/400x156/787678/fff" },])
-
-  script(src="assets/js/main.js")
+        [
+          { mediaSrc: "//player.vimeo.com/video/91090531", src: "//dummyimage.com/"+width+"x"+height+"/787678/fff", mdSrc:"//dummyimage.com/"+mdWidth+"x"+mdHeight+"/787678/fff", smSrc:"//dummyimage.com/"+smWidth+"x"+smHeight+"/787678/fff", xsSrc:"//dummyimage.com/"+xsWidth+"x"+xsHeight+"/787678/fff" },
+          { src: "//dummyimage.com/"+width+"x"+height+"/787678/fff", mdSrc:"//dummyimage.com/"+mdWidth+"x"+mdHeight+"/787678/fff", smSrc:"//dummyimage.com/"+smWidth+"x"+smHeight+"/787678/fff", xsSrc:"//dummyimage.com/"+xsWidth+"x"+xsHeight+"/787678/fff" },
+          { src: "//dummyimage.com/"+width+"x"+height+"/787678/fff", mdSrc:"//dummyimage.com/"+mdWidth+"x"+mdHeight+"/787678/fff", smSrc:"//dummyimage.com/"+smWidth+"x"+smHeight+"/787678/fff", xsSrc:"//dummyimage.com/"+xsWidth+"x"+xsHeight+"/787678/fff" },
+          { src: "//dummyimage.com/"+width+"x"+height+"/787678/fff", mdSrc:"//dummyimage.com/"+mdWidth+"x"+mdHeight+"/787678/fff", smSrc:"//dummyimage.com/"+smWidth+"x"+smHeight+"/787678/fff", xsSrc:"//dummyimage.com/"+xsWidth+"x"+xsHeight+"/787678/fff" },
+        ],
+        {
+          //backgroundScale: "cover",
+          //backgroundScale: "contain",
+          //scaleBackgroundProportionally: "false"
+        }
+      )
+      script(src="assets/js/main.js")
