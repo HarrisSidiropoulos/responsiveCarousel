@@ -36,6 +36,10 @@ gulp.task('holder', function() {
     .pipe(gulp.dest(outputDir+assets+'/js'));
 });
 gulp.task('fonts', function() {
+  return gulp.src('bower_components/bootstrap/fonts')
+    .pipe(gulp.dest(outputDir+assets+'/fonts'));
+});
+gulp.task('fonts', function() {
   return gulp.src('bower_components/bootstrap-sass/fonts/*')
     .pipe(gulp.dest(outputDir+assets+'/fonts'));
 });
@@ -63,5 +67,5 @@ gulp.task('watch', function() {
   });
 });
 
-gulp.task('default', ['js', 'holder', 'jade', 'sass']);
+gulp.task('default', ['fonts', 'js', 'holder', 'jade', 'sass']);
 gulp.task('live', ['js', 'holder', 'jade', 'sass', 'watch']);
