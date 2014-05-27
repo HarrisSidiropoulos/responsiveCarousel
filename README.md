@@ -14,6 +14,7 @@ _(Coming soon)_
 
 ## Examples
 Clone current repository
+
 run: `npm install && bower install && gulp`
 
 ## Contributing

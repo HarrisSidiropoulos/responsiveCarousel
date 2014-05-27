@@ -2,7 +2,9 @@
  responsiveCarousel
  */
 var $ = require("jquery"),
-  requestAnimFrame = require("animationframe");
+    hammerjs = require("hammerjs"),
+    requestAnimFrame = require("animationframe");
+
 require("bootstrapify");
 
 (function ($) {
@@ -65,6 +67,17 @@ require("bootstrapify");
           interval: 1000000000
         });
       }
+
+      var element = hammerjs($this.get()[0]);
+      element.on("drag swipe swiperight swipeleft", function(event) {
+        console.log(event.type);
+        if (event.type == "swipeleft") {
+          $this.carousel("next");
+        } else if (event.type == "swiperight") {
+          $this.carousel("prev");
+        }
+        event.gesture.preventDefault();
+      });
 
       onImageChange();
 
