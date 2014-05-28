@@ -38,7 +38,7 @@ require("bootstrapify");
         screenXs: 480,
         screenSm: 768,
         screenMd: 992,
-        screenLg: 1200
+        screenLg: 1140
       }
 
       var $this = $(this),
