@@ -20,8 +20,13 @@ function getOutputDir() {
 }
 
 gulp.task('jade', function() {
+  var config = {};
+
+  if (env === DEVELOPMENT) {
+    config.pretty = true;
+  }
   return gulp.src("src/templates/**/index.jade")
-    .pipe(jade())
+    .pipe(jade(config))
     .pipe(gulp.dest(getOutputDir()));
 });
 gulp.task('js', function() {

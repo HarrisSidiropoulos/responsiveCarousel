@@ -25,13 +25,13 @@
   ],
   "devDependencies": {
     "gulp": "~3.6.2",
-    "gulp-jade": "~0.5.0",
     "gulp-browserify": "~0.5.0",
-    "gulp-uglify": "~0.3.0",
-    "gulp-if": "~1.2.0",
-    "gulp-sass": "~0.7.1",
     "gulp-connect": "~2.0.5",
-    "gulp-livereload": "~1.5.0"
+    "gulp-if": "~1.2.0",
+    "gulp-jade": "~0.5.0",
+    "gulp-livereload": "~1.5.0",
+    "gulp-sass": "~0.7.1",
+    "gulp-uglify": "~0.3.0"
   },
   "dependencies": {
     "animationevents": "git://github.com/HarrisSidiropoulos/animationevents",
