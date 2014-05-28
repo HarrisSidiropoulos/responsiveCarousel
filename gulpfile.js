@@ -28,12 +28,12 @@ gulp.task('jade', function() {
 gulp.task('js', function() {
   return gulp.src('src/js/main.js')
     .pipe(browserify({ debug: env === DEVELOPMENT }))
-    .pipe(gulpif(env === 'production', uglify()))
+    .pipe(gulpif(env === PRODUCTION, uglify()))
     .pipe(gulp.dest(getOutputDir()+ASSETS+'/js'));
 });
 gulp.task('holder', function() {
   return gulp.src('src/js/holder.js')
-    .pipe(gulpif(env === 'production', uglify()))
+    .pipe(gulpif(env === PRODUCTION, uglify()))
     .pipe(gulp.dest(getOutputDir()+ASSETS+'/js'));
 });
 gulp.task('fonts', function() {
@@ -49,7 +49,7 @@ gulp.task('sass', function() {
 
   if (env === DEVELOPMENT) {
     config.sourceComments = 'map';
-  } else if (env === 'production') {
+  } else if (env === PRODUCTION) {
     config.outputStyle = 'compressed';
   }
 
