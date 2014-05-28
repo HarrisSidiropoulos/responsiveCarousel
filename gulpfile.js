@@ -1,16 +1,16 @@
 var gulp = require('gulp'),
-  jade = require('gulp-jade'),
-  browserify = require('gulp-browserify'),
-  uglify = require('gulp-uglify'),
-  sass = require('gulp-sass'),
+    jade = require('gulp-jade'),
+    browserify = require('gulp-browserify'),
+    uglify = require('gulp-uglify'),
+    sass = require('gulp-sass'),
 
-  livereload = require('gulp-livereload'),
-  gulpif = require('gulp-if');
+    livereload = require('gulp-livereload'),
+    gulpif = require('gulp-if');
 
 var DEVELOPMENT = 'development',
     PRODUCTION = 'production',
-    BUILD="demo/",
-    ASSETS= "/assets",
+    BUILD = "demo/",
+    ASSETS = "/assets",
     SRC = "src";
 
 var env = process.env.NODE_ENV || DEVELOPMENT;
