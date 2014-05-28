@@ -28,7 +28,6 @@ require('responsiveCarousel');
       </div>
     </div><a href="#" data-slide="prev" class="left carousel-control"><span class="glyphicon glyphicon-chevron-left"></span></a><a href="#" data-slide="next" class="right carousel-control"><span class="glyphicon glyphicon-chevron-right"></span></a>
   </div>
-  <script src="assets/js/main.js"></script>
 </div>
 ```
 ## Documentation
