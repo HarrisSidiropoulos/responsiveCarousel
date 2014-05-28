@@ -37,10 +37,6 @@ gulp.task('holder', function() {
     .pipe(gulp.dest(getOutputDir()+ASSETS+'/js'));
 });
 gulp.task('fonts', function() {
-  return gulp.src('bower_components/bootstrap/fonts')
-    .pipe(gulp.dest(getOutputDir()+ASSETS+'/fonts'));
-});
-gulp.task('fonts', function() {
   return gulp.src('bower_components/bootstrap-sass/fonts/*')
     .pipe(gulp.dest(getOutputDir()+ASSETS+'/fonts'));
 });
