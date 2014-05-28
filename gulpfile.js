@@ -24,7 +24,6 @@ gulp.task('jade', function() {
     .pipe(jade())
     .pipe(gulp.dest(getOutputDir()));
 });
-
 gulp.task('js', function() {
   return gulp.src('src/js/main.js')
     .pipe(browserify({ debug: env === DEVELOPMENT }))
