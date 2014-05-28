@@ -60,9 +60,9 @@ gulp.task('sass', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(SRC+'/templates/**/*.jade', ['jade']);
-  gulp.watch(SRC+'/js/**/*.js', ['js']);
-  gulp.watch(SRC+'/sass/**/*.scss', ['sass']);
+  gulp.watch(SRC+'/**/*.jade', ['jade']);
+  gulp.watch(SRC+'/**/*.js', ['js']);
+  gulp.watch(SRC+'/**/*.scss', ['sass']);
   var server = livereload();
   gulp.watch(BUILD+'**').on('change', function(file) {
     server.changed(file.path);
