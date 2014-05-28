@@ -10,7 +10,8 @@ var gulp = require('gulp'),
 var DEVELOPMENT = 'development',
     PRODUCTION = 'production',
     BUILD="demo/",
-    ASSETS= "/assets";
+    ASSETS= "/assets",
+    SRC = "src";
 
 var env = process.env.NODE_ENV || DEVELOPMENT;
 if (env!==DEVELOPMENT) env = PRODUCTION;
@@ -25,18 +26,18 @@ gulp.task('jade', function() {
   if (env === DEVELOPMENT) {
     config.pretty = true;
   }
-  return gulp.src("src/templates/**/index.jade")
+  return gulp.src(SRC+"/templates/**/index.jade")
     .pipe(jade(config))
     .pipe(gulp.dest(getOutputDir()));
 });
 gulp.task('js', function() {
-  return gulp.src('src/js/main.js')
+  return gulp.src(SRC+'/js/main.js')
     .pipe(browserify({ debug: env === DEVELOPMENT }))
     .pipe(gulpif(env === PRODUCTION, uglify()))
     .pipe(gulp.dest(getOutputDir()+ASSETS+'/js'));
 });
 gulp.task('holder', function() {
-  return gulp.src('src/js/holder.js')
+  return gulp.src(SRC+'/js/holder.js')
     .pipe(gulpif(env === PRODUCTION, uglify()))
     .pipe(gulp.dest(getOutputDir()+ASSETS+'/js'));
 });
@@ -53,15 +54,15 @@ gulp.task('sass', function() {
     config.outputStyle = 'compressed';
   }
 
-  return gulp.src('src/sass/main.scss')
+  return gulp.src(SRC+'/sass/main.scss')
     .pipe(sass(config))
     .pipe(gulp.dest(getOutputDir()+ASSETS+'/css'));
 });
 
 gulp.task('watch', function() {
-  gulp.watch('src/templates/**/*.jade', ['jade']);
-  gulp.watch('src/js/**/*.js', ['js']);
-  gulp.watch('src/sass/**/*.scss', ['sass']);
+  gulp.watch(SRC+'/templates/**/*.jade', ['jade']);
+  gulp.watch(SRC+'/js/**/*.js', ['js']);
+  gulp.watch(SRC+'/sass/**/*.scss', ['sass']);
   var server = livereload();
   gulp.watch(BUILD+'**').on('change', function(file) {
     server.changed(file.path);
