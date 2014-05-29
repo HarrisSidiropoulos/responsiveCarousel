@@ -1,33 +1,40 @@
 $carousel-media-control-height: 96px !default;
 $carousel-controls-offset-bottom: 50px !default;
+$carousel-play-icon-size: 26px !default;
 
 .carousel-media-control {
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-left: -$carousel-media-control-height/2;
-  margin-top: -$carousel-media-control-height/2;
+  margin-left: -$carousel-media-control-height*.5;
+  margin-top: -$carousel-media-control-height*.5;
 
   a {
     display: block;
     width: $carousel-media-control-height;
     height: $carousel-media-control-height;
-    padding: $carousel-media-control-height/3;
+    padding: $carousel-media-control-height*.5;
+    padding-left: $carousel-media-control-height*.5;
     background-color: #666;
-    border-radius: $carousel-media-control-height/2;
-    font-size: 26px;
+    border-radius: $carousel-media-control-height*.5;
+    font-size: $carousel-play-icon-size;
     color: #FFF;
     .glyphicon {
-      margin-left: 4px;
+      position: absolute;
+      top: 50%;
+      bottom: 50%;
+      margin-top: -$carousel-play-icon-size*.5;
+      margin-left: -$carousel-play-icon-size*.5;
     }
+
   }
   @media (max-width: $screen-xs-max) {
     margin-left: -$carousel-media-control-height*.35;
-    margin-top: -$carousel-media-control-height*.33;
+    margin-top: -$carousel-media-control-height*.35;
     a {
       width: $carousel-media-control-height*.7;
       height: $carousel-media-control-height*.7;
-      padding: $carousel-media-control-height*.19;
+      padding: $carousel-media-control-height*.35;
     }
   }
 }
