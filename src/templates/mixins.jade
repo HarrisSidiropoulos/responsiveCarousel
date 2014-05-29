@@ -5,7 +5,7 @@ mixin carousel(images, options)
   - imgStretch = options.imgStretch || "true"
   - backgroundScale = options.backgroundScale || ""
   - scaleBackgroundProportionally = options.scaleBackgroundProportionally || "true"
-  - if (typeof images === "string") images = [{ src:images }];
+  - if (typeof images === "string") images = [images];
 
   div.carousel.slide(
     data-ride="responsive-carousel",
@@ -25,12 +25,11 @@ mixin carousel(images, options)
       each img, index in images
         - var active = index==0 ? "active" : ""
         div.item(class=active)
-          - if (typeof img === "string") img = { src:img };
           - if (img.mediaSrc)
             div.carousel-media-control
               a(href="#", data-media-type=img.mediaType || "vimeo", data-media-src=img.mediaSrc)
                 span.glyphicon.glyphicon-play
-          img(data-src=img.src,
+          img(data-src=typeof img === "string" ? img : img.src,
               data-md-src=img.mdSrc?img.mdSrc:"",
               data-sm-src=img.smSrc?img.smSrc:"",
               data-xs-src=img.xsSrc?img.xsSrc:"")
