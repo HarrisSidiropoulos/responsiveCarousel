@@ -1,4 +1,4 @@
-$carousel-media-control-height: 96px !default;
+$carousel-media-control-height: 100px !default;
 $carousel-controls-offset-bottom: 50px !default;
 $carousel-play-icon-size: 26px !default;
 
@@ -29,12 +29,18 @@ $carousel-play-icon-size: 26px !default;
 
   }
   @media (max-width: $screen-xs-max) {
-    margin-left: -$carousel-media-control-height*.35;
-    margin-top: -$carousel-media-control-height*.35;
+    $scale-down: .7;
+    margin-left: -$carousel-media-control-height*$scale-down*.5;
+    margin-top: -$carousel-media-control-height*$scale-down*.5;
     a {
-      width: $carousel-media-control-height*.7;
-      height: $carousel-media-control-height*.7;
-      padding: $carousel-media-control-height*.35;
+      font-size: $carousel-play-icon-size*$scale-down;
+      width: $carousel-media-control-height*$scale-down;
+      height: $carousel-media-control-height*$scale-down;
+      padding: $carousel-media-control-height*$scale-down*.5;
+      .glyphicon {
+        margin-top: -$carousel-play-icon-size*$scale-down*.5;
+        margin-left: -$carousel-play-icon-size*$scale-down*.5;
+      }
     }
   }
 }
@@ -58,7 +64,7 @@ $carousel-play-icon-size: 26px !default;
     background: none;
     opacity: 0;
     .glyphicon {
-      padding-top: $carousel-controls-offset-bottom/2;
+      padding-top: $carousel-controls-offset-bottom*.5;
     }
   }
   &:hover .carousel-control {
