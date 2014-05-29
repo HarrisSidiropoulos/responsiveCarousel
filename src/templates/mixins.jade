@@ -18,13 +18,11 @@ mixin carousel(images, options)
     - if (images.length>1)
       ol.carousel-indicators
         each val, index in images
-          - var active = index==0 ? "active" : ""
-          li(class=active, data-slide-to=index)
+          li(class=index==0 ? "active" : "", data-slide-to=index)
 
     div.carousel-inner
       each img, index in images
-        - var active = index==0 ? "active" : ""
-        div.item(class=active)
+        div.item(class=index==0 ? "active" : "")
           - if (img.mediaSrc)
             div.carousel-media-control
               a(href="#", data-media-type=img.mediaType || "vimeo", data-media-src=img.mediaSrc)
