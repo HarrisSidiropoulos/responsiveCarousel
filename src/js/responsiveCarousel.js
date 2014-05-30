@@ -105,11 +105,12 @@ require("bootstrapify");
         if (reloadOnResize) startImageLoading(imagesContainer.find(".active img"), true);
       }
 
-      function onMediaControlClick() {
+      function onMediaControlClick(e) {
         var modal = $('.modal.video-container'),
           btn = $(this);
 
         addVideo(btn.parent().parent().find(".carousel-media-control"));
+        e.preventDefault();
 
         function addVideo(element) {
           if ($this.hasClass("carousel-video-playing")) return;
