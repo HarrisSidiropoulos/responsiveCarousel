@@ -5,7 +5,7 @@ mixin carousel(images, options)
   - imgStretch = options.imgStretch || "true"
   - backgroundScale = options.backgroundScale || ""
   - scaleBackgroundProportionally = options.scaleBackgroundProportionally || "true"
-  - if (typeof images === "string") images = [images];
+  - if (typeof images === "string") images = [images]
 
   div.carousel.slide(
     data-ride="responsive-carousel",
