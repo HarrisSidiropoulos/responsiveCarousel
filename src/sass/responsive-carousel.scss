@@ -1,6 +1,9 @@
 $carousel-media-control-height: 100px !default;
+$carousel-media-control-scale-xs: .7 !default;
 $carousel-controls-offset-bottom: 50px !default;
 $carousel-play-icon-size: 26px !default;
+$carousel-media-control-background-color: #666 !default;
+$carousel-media-control-background-color-hover: #333 !default;
 
 .carousel-media-control {
   position: absolute;
@@ -14,8 +17,7 @@ $carousel-play-icon-size: 26px !default;
     width: $carousel-media-control-height;
     height: $carousel-media-control-height;
     padding: $carousel-media-control-height*.5;
-    padding-left: $carousel-media-control-height*.5;
-    background-color: #666;
+    background-color: $carousel-media-control-background-color;
     border-radius: $carousel-media-control-height*.5;
     font-size: $carousel-play-icon-size;
     color: #FFF;
@@ -29,7 +31,7 @@ $carousel-play-icon-size: 26px !default;
 
   }
   @media (max-width: $screen-xs-max) {
-    $scale-down: .7;
+    $scale-down: $carousel-media-control-scale-xs;
     margin-left: -$carousel-media-control-height*$scale-down*.5;
     margin-top: -$carousel-media-control-height*$scale-down*.5;
     a {
@@ -45,7 +47,7 @@ $carousel-play-icon-size: 26px !default;
   }
 }
 .carousel-media-control a:hover {
-  background-color: #333;
+  background-color: $carousel-media-control-background-color-hover;
 }
 .carousel-media {
   position: absolute;
