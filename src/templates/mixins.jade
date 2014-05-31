@@ -6,6 +6,7 @@ mixin carousel(images, options)
   - backgroundScale = options.backgroundScale || ""
   - scaleBackgroundProportionally = options.scaleBackgroundProportionally || "true"
   - if (typeof images === "string") images = [images]
+  - if (typeof images === "object" && !(images instanceof Array)) images = [images]
 
   div.carousel.slide(
     data-ride="responsive-carousel",
