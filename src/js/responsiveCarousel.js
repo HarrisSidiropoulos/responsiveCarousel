@@ -2,9 +2,12 @@
  responsiveCarousel
  */
 var $ = require("jquery"),
+    translate3d = require("css3-translate"),
     hammerjs = require("hammerjs"),
+    animationEvents = require("animationevents"),
     requestAnimFrame = require("animationframe");
 
+require("jquery.transit");
 require("bootstrapify");
 
 (function ($) {
@@ -69,18 +72,87 @@ require("bootstrapify");
       }
 
       var element = hammerjs($this.get()[0]);
-      element.on("drag swipe swiperight swipeleft", function(event) {
-        if (event.type == "swipeleft") {
-          $this.carousel("next");
-        } else if (event.type == "swiperight") {
-          $this.carousel("prev");
-        }
-        event.gesture.preventDefault();
-      });
+      var activeImage, index, nextIndex, previousIndex, nextImage, previousImage;
 
-      onImageChange();
+      if (imageItems.length>2) {
+        element.on("dragstart", onDragStart);
+        element.on("drag", onDrag);
+        element.on("dragend", onDragEnd);
+      }
+      function onDragStart(event) {
+        activeImage = imagesContainer.find(".active");
+        index = activeImage.index();
+        nextIndex = index === imageItems.length-1 ? 0 : index+1;
+        previousIndex = index===0 ? imageItems.length-1 : index- 1;
+        nextImage = $(imageItems[nextIndex]).parent();
+        previousImage = $(imageItems[previousIndex]).parent();
+        nextImage.addClass("next");
+        previousImage.addClass("prev");
+
+        if (event.gesture) event.gesture.preventDefault();
+      }
+
+      function onDrag(event) {
+        //var c = imagesContainer.get()[0];
+        var a = activeImage.get()[0];
+        var b = nextImage.get()[0];
+        var c = previousImage.get()[0];
+
+        translate3d.x(a, event.gesture.deltaX);
+        translate3d.x(b, event.gesture.deltaX);
+        translate3d.x(c, event.gesture.deltaX);
+        if (event.gesture) event.gesture.preventDefault();
+      }
+
+      function onDragEnd(event) {
+        var x = 0, duration = 600;
+        if (event.gesture.deltaX<0) {
+          x = -$this.width();
+        } else {
+          x = $this.width();
+        }
+
+        activeImage.transition({ "-webkit-transform": "translate3d("+x+"px, 0px, 0px)", duration: duration });
+        nextImage.transition({ "-webkit-transform": "translate3d("+x+"px, 0px, 0px)", duration: duration });
+        previousImage.transition({ "-webkit-transform": "translate3d("+x+"px, 0px, 0px)", duration: duration });
+
+        setTimeout(function() {
+          var a = activeImage.get()[0];
+          var b = nextImage.get()[0];
+          var c = previousImage.get()[0];
+
+          translate3d.x(a, 0);
+          translate3d.x(b, 0);
+          translate3d.x(c, 0);
+
+          if (event.gesture.deltaX<0) {
+            nextImage.addClass("disable-transition");
+            nextImage.addClass("active");
+          } else {
+            previousImage.addClass("disable-transition");
+            previousImage.addClass("active");
+          }
+          activeImage.removeClass("active");
+          nextImage.removeClass("next");
+          previousImage.removeClass("prev");
+        }, duration-50);
+        setTimeout(function() {
+          activeImage.removeClass("disable-transition");
+          nextImage.removeClass("disable-transition");
+          previousImage.removeClass("disable-transition");
+          activeImage = imagesContainer.find(".active");
+          index = activeImage.index();
+
+          $(".carousel-indicators .active").removeClass("active");
+          $(".carousel-indicators li").eq(index).addClass("active");
+
+          $this.trigger("slide.bs.carousel");
+          $this.trigger("slid.bs.carousel");
+        }, duration);
+      }
 
       $(window).unbind("resize", onWindowResize).bind("resize", onWindowResize);
+      onImageChange();
       onWindowResize();
 
       function onWindowResize() {
@@ -102,7 +174,7 @@ require("bootstrapify");
           });
           $this.height(dimensions.height);
         }
-        if (reloadOnResize) startImageLoading(imagesContainer.find(".active img"), true);
+        if (reloadOnResize) startImageLoading(imagesContainer.find(".active img"));
       }
 
       function onMediaControlClick(e) {

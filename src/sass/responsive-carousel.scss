@@ -46,6 +46,14 @@ $carousel-media-control-background-color-hover: #333 !default;
     }
   }
 }
+.disable-transition {
+  transition: none !important;
+}
+.carousel .item.left, .carousel .item.right {
+  -webkit-transform: translateX(0px) !important;
+  -ms-transform: translateX(0px) !important; // IE9+
+  transform: translateX(0px) !important;
+}
 .carousel-media-control a:hover {
   background-color: $carousel-media-control-background-color-hover;
 }
