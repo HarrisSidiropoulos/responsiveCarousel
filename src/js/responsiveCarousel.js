@@ -85,11 +85,17 @@ require("bootstrapify");
 
         previousIndex = index===0 ? imageItems.length-1 : index- 1;
         previousImage = $(imageItems[previousIndex]).parent();
-        if (imageItems.length>2) previousImage.addClass("prev");
+        previousImage.addClass("prev");
 
         nextIndex = index === imageItems.length-1 ? 0 : index+1;
         nextImage = $(imageItems[nextIndex]).parent();
         nextImage.addClass("next");
+
+        if (imageItems.length===2 && index===0) {
+          previousImage.removeClass("prev");
+        } else if (imageItems.length===2 && index===1) {
+          nextImage.removeClass("next");
+        }
 
         if (event.gesture) event.gesture.preventDefault();
       }
@@ -107,10 +113,16 @@ require("bootstrapify");
       }
 
       function onDragEnd(event) {
-        var x = 0, duration = 600, threshold = $this.width()*.2;
-        if (event.gesture.deltaX<-threshold) {
+        var x = 0, duration = 600, threshold = $this.width()*.2,
+          isNext = event.gesture.deltaX<-threshold,
+          isPrevious = event.gesture.deltaX>threshold;
+        if (imageItems.length===2) {
+          isNext = isNext && index===0;
+          isPrevious = isPrevious && index===1;
+        }
+        if (isNext) {
           x = -$this.width();
-        } else if (event.gesture.deltaX>threshold && imageItems.length>2) {
+        } else if (isPrevious) {
           x = $this.width();
         } else {
           x = 0;
@@ -128,16 +140,16 @@ require("bootstrapify");
 
           translate3d.x(a, 0);
           translate3d.x(b, 0);
-          if (imageItems.length>2) translate3d.x(c, 0);
+          translate3d.x(c, 0);
 
-          if (event.gesture.deltaX<-threshold) {
+          if (isNext) {
             nextImage.addClass("disable-transition");
             nextImage.addClass("active");
-          } else if (event.gesture.deltaX>threshold && imageItems.length>2) {
+          } else if (isPrevious) {
             previousImage.addClass("disable-transition");
             previousImage.addClass("active");
           }
-          if (event.gesture.deltaX<-threshold || (event.gesture.deltaX>threshold && imageItems.length>2)) {
+          if (isNext || isPrevious) {
             activeImage.removeClass("active");
           }
           nextImage.removeClass("next");
@@ -149,7 +161,7 @@ require("bootstrapify");
           previousImage.removeClass("disable-transition");
           activeImage = imagesContainer.find(".active");
           index = activeImage.index();
-          if (event.gesture.deltaX<-threshold || (event.gesture.deltaX>threshold && imageItems.length>2)) {
+          if (isNext || isPrevious) {
             $(".carousel-indicators .active").removeClass("active");
             $(".carousel-indicators li").eq(index).addClass("active");
 
