@@ -74,7 +74,7 @@ require("bootstrapify");
       var element = hammerjs($this.get()[0]);
       var activeImage, index, nextIndex, previousIndex, nextImage, previousImage;
 
-      if (imageItems.length>2) {
+      if (imageItems.length>1) {
         element.on("dragstart", onDragStart);
         element.on("drag", onDrag);
         element.on("dragend", onDragEnd);
@@ -82,12 +82,14 @@ require("bootstrapify");
       function onDragStart(event) {
         activeImage = imagesContainer.find(".active");
         index = activeImage.index();
-        nextIndex = index === imageItems.length-1 ? 0 : index+1;
+
         previousIndex = index===0 ? imageItems.length-1 : index- 1;
-        nextImage = $(imageItems[nextIndex]).parent();
         previousImage = $(imageItems[previousIndex]).parent();
+        if (imageItems.length>2) previousImage.addClass("prev");
+
+        nextIndex = index === imageItems.length-1 ? 0 : index+1;
+        nextImage = $(imageItems[nextIndex]).parent();
         nextImage.addClass("next");
-        previousImage.addClass("prev");
 
         if (event.gesture) event.gesture.preventDefault();
       }
@@ -105,16 +107,19 @@ require("bootstrapify");
       }
 
       function onDragEnd(event) {
-        var x = 0, duration = 600;
-        if (event.gesture.deltaX<0) {
+        var x = 0, duration = 600, threshold = $this.width()*.2;
+        if (event.gesture.deltaX<-threshold) {
           x = -$this.width();
-        } else {
+        } else if (event.gesture.deltaX>threshold && imageItems.length>2) {
           x = $this.width();
+        } else {
+          x = 0;
         }
 
         activeImage.transition({ "-webkit-transform": "translate3d("+x+"px, 0px, 0px)", duration: duration });
         nextImage.transition({ "-webkit-transform": "translate3d("+x+"px, 0px, 0px)", duration: duration });
-        previousImage.transition({ "-webkit-transform": "translate3d("+x+"px, 0px, 0px)", duration: duration });
+        if (imageItems.length>2)
+          previousImage.transition({ "-webkit-transform": "translate3d("+x+"px, 0px, 0px)", duration: duration });
 
         setTimeout(function() {
           var a = activeImage.get()[0];
@@ -123,16 +128,18 @@ require("bootstrapify");
 
           translate3d.x(a, 0);
           translate3d.x(b, 0);
-          translate3d.x(c, 0);
+          if (imageItems.length>2) translate3d.x(c, 0);
 
-          if (event.gesture.deltaX<0) {
+          if (event.gesture.deltaX<-threshold) {
             nextImage.addClass("disable-transition");
             nextImage.addClass("active");
-          } else {
+          } else if (event.gesture.deltaX>threshold && imageItems.length>2) {
             previousImage.addClass("disable-transition");
             previousImage.addClass("active");
           }
-          activeImage.removeClass("active");
+          if (event.gesture.deltaX<-threshold || (event.gesture.deltaX>threshold && imageItems.length>2)) {
+            activeImage.removeClass("active");
+          }
           nextImage.removeClass("next");
           previousImage.removeClass("prev");
         }, duration-50);
@@ -142,12 +149,13 @@ require("bootstrapify");
           previousImage.removeClass("disable-transition");
           activeImage = imagesContainer.find(".active");
           index = activeImage.index();
+          if (event.gesture.deltaX<-threshold || (event.gesture.deltaX>threshold && imageItems.length>2)) {
+            $(".carousel-indicators .active").removeClass("active");
+            $(".carousel-indicators li").eq(index).addClass("active");
 
-          $(".carousel-indicators .active").removeClass("active");
-          $(".carousel-indicators li").eq(index).addClass("active");
-
-          $this.trigger("slide.bs.carousel");
-          $this.trigger("slid.bs.carousel");
+            $this.trigger("slide.bs.carousel");
+            $this.trigger("slid.bs.carousel");
+          }
         }, duration);
       }
 
