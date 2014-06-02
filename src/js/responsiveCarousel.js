@@ -80,6 +80,7 @@ require("bootstrapify");
         element.on("dragend", onDragEnd);
       }
       function onDragStart(event) {
+        var imagesLength = imageItems.length;
         activeImage = imagesContainer.find(".active");
         index = activeImage.index();
 
@@ -91,9 +92,9 @@ require("bootstrapify");
         nextImage = $(imageItems[nextIndex]).parent();
         nextImage.addClass("next");
 
-        if (imageItems.length===2 && index===0) {
+        if (imagesLength===2 && index===0) {
           previousImage.removeClass("prev");
-        } else if (imageItems.length===2 && index===1) {
+        } else if (imagesLength===2 && index===imagesLength-1) {
           nextImage.removeClass("next");
         }
 
@@ -101,7 +102,6 @@ require("bootstrapify");
       }
 
       function onDrag(event) {
-        //var c = imagesContainer.get()[0];
         var a = activeImage.get()[0];
         var b = nextImage.get()[0];
         var c = previousImage.get()[0];
@@ -113,12 +113,12 @@ require("bootstrapify");
       }
 
       function onDragEnd(event) {
-        var x = 0, duration = 600, threshold = $this.width()*.2,
+        var x = 0, duration = 480, threshold = $this.width()*.2,
           isNext = event.gesture.deltaX<-threshold,
           isPrevious = event.gesture.deltaX>threshold;
         if (imageItems.length===2) {
           isNext = isNext && index===0;
-          isPrevious = isPrevious && index===1;
+          isPrevious = isPrevious && index===imageItems.length-1;
         }
         if (isNext) {
           x = -$this.width();
@@ -127,11 +127,16 @@ require("bootstrapify");
         } else {
           x = 0;
         }
+        var transition = {
+          duration: duration, easing:"ease-in-out"
+        };
+        var rule = "-"+translate3d.rule().toLowerCase().replace(/transform/, "-transform");
+        transition[rule] = "translate3d("+x+"px, 0px, 0px)";
 
-        activeImage.transition({ "-webkit-transform": "translate3d("+x+"px, 0px, 0px)", duration: duration });
-        nextImage.transition({ "-webkit-transform": "translate3d("+x+"px, 0px, 0px)", duration: duration });
+        activeImage.transition(transition);
+        nextImage.transition(transition);
         if (imageItems.length>2)
-          previousImage.transition({ "-webkit-transform": "translate3d("+x+"px, 0px, 0px)", duration: duration });
+          previousImage.transition(transition);
 
         setTimeout(function() {
           var a = activeImage.get()[0];
@@ -154,20 +159,23 @@ require("bootstrapify");
           }
           nextImage.removeClass("next");
           previousImage.removeClass("prev");
-        }, duration-50);
-        setTimeout(function() {
-          activeImage.removeClass("disable-transition");
-          nextImage.removeClass("disable-transition");
-          previousImage.removeClass("disable-transition");
-          activeImage = imagesContainer.find(".active");
-          index = activeImage.index();
-          if (isNext || isPrevious) {
-            $(".carousel-indicators .active").removeClass("active");
-            $(".carousel-indicators li").eq(index).addClass("active");
 
-            $this.trigger("slide.bs.carousel");
-            $this.trigger("slid.bs.carousel");
-          }
+          requestAnimFrame(function() {
+            requestAnimFrame(function() {
+              activeImage.removeClass("disable-transition");
+              nextImage.removeClass("disable-transition");
+              previousImage.removeClass("disable-transition");
+              activeImage = imagesContainer.find(".active");
+              index = activeImage.index();
+              if (isNext || isPrevious) {
+                $(".carousel-indicators .active").removeClass("active");
+                $(".carousel-indicators li").eq(index).addClass("active");
+
+                $this.trigger("slide.bs.carousel");
+                $this.trigger("slid.bs.carousel");
+              }
+            });
+          })
         }, duration);
       }
 
