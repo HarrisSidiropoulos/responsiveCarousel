@@ -1,18 +1,21 @@
-mixin carousel(images, options)
+mixin carousel(images, options, classes)
   - options = options || {}
   - autoplay = options.autoplay || "false";
   - loadNextPrevious = options.loadNextPrevious || "true"
   - imgStretch = options.imgStretch || "true"
+  - fitParentHeight = options.fitParentHeight || "false"
   - backgroundScale = options.backgroundScale || ""
   - scaleBackgroundProportionally = options.scaleBackgroundProportionally || "true"
   - if (!Array.isArray(images)) images = [images]
 
   div.carousel.slide(
+    class=classes,
     data-ride="responsive-carousel",
     data-autoplay=autoplay,
     data-load-next-previous=loadNextPrevious,
     data-background-scale=backgroundScale,
     data-scale-background-proportionally=scaleBackgroundProportionally,
+    data-fit-parent-height=fitParentHeight,
     data-img-stretch=imgStretch
   )
     - if (images.length>1)

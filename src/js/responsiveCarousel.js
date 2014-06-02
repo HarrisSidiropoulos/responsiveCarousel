@@ -34,6 +34,7 @@ require("bootstrapify");
         backgroundScale: false,
         scaleBackgroundProportionally: true,
         imgStretch: true,
+        fitParentHeight: false,
         loadNextPrevious: true,
         reloadOnResize: true,
         autoplay: false,
@@ -49,6 +50,7 @@ require("bootstrapify");
         carouselMediaControls = $this.find(".carousel-media-control a"),
         imageItems = $this.find(".carousel-inner .item img"),
         carouselWidth = $this.width(),
+        fitParentHeight = settings.fitParentHeight,
         maxImageWidth = settings.maxImageWidth,
         maxImageHeight = settings.maxImageHeight,
         backgroundScale = settings.backgroundScale,
@@ -191,6 +193,11 @@ require("bootstrapify");
         if (stretch) {
           imageItems.each(function() {
             $(this).width($(this).parent().parent().width());
+          });
+        }
+        if (fitParentHeight) {
+          imageItems.each(function() {
+            $(this).parent().height($(this).parent().parent().height());
           });
         }
         if (backgroundScale && scaleBackgroundProportionally) {
