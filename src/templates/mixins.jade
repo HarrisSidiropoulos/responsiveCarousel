@@ -10,13 +10,13 @@ mixin carousel(images, options, classes)
   - if (!Array.isArray(images)) images = [images]
 
   div.carousel.slide(
-  class=classes,
-  data-ride="responsive-carousel",
-  data-autoplay=autoplay,
-  data-load-next-previous=loadNextPrevious,
-  data-background-scale=backgroundScale,
-  data-scale-background-proportionally=scaleBackgroundProportionally,
-  data-img-stretch=imgStretch
+    class=classes,
+    data-ride="responsive-carousel",
+    data-autoplay=autoplay,
+    data-load-next-previous=loadNextPrevious,
+    data-background-scale=backgroundScale,
+    data-scale-background-proportionally=scaleBackgroundProportionally,
+    data-img-stretch=imgStretch
   )
     - if (images.length>1 && useIndicators===true)
       ol.carousel-indicators
