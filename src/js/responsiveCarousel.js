@@ -4,7 +4,6 @@
 var $ = require("jquery"),
     translate3d = require("css3-translate"),
     hammerjs = require("hammerjs"),
-    animationEvents = require("animationevents"),
     requestAnimFrame = require("animationframe");
 
 require("jquery.transit");
