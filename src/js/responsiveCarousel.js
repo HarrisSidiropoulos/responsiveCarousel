@@ -63,6 +63,7 @@ require("bootstrapify");
         SCREEN_LG = settings.screenLg;
 
       $this.unbind("slide.bs.carousel", onImageChange).bind("slide.bs.carousel", onImageChange);
+      $this.unbind("slid.bs.carousel", onImageChange).bind("slid.bs.carousel", onImageChange);
       carouselMediaControls.unbind("click", onMediaControlClick).bind("click", onMediaControlClick);
 
       if (!settings.autoplay) {
