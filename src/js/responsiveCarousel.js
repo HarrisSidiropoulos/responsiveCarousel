@@ -73,7 +73,7 @@ require("bootstrapify");
       }
 
       var element = hammerjs($this.get()[0]);
-      var activeImage, index, nextIndex, previousIndex, nextImage, previousImage;
+      var activeImage, index, nextIndex, previousIndex, nextImage, previousImage, dragTimeOutId = -1;
 
       if (imageItems.length>1) {
         element.on("dragstart", onDragStart);
@@ -81,6 +81,8 @@ require("bootstrapify");
         element.on("dragend", onDragEnd);
       }
       function onDragStart(event) {
+        clearTimeout(dragTimeOutId);
+        dragTimeOutId = -1;
         var imagesLength = imageItems.length;
         activeImage = imagesContainer.find(".active");
         index = activeImage.index();
@@ -103,6 +105,8 @@ require("bootstrapify");
       }
 
       function onDrag(event) {
+        clearTimeout(dragTimeOutId);
+        dragTimeOutId = -1;
         var a = activeImage.get()[0];
         var b = nextImage.get()[0];
         var c = previousImage.get()[0];
@@ -114,6 +118,10 @@ require("bootstrapify");
       }
 
       function onDragEnd(event) {
+        clearTimeout(dragTimeOutId);
+        if (imagesContainer.find(".active").length===0) {
+          return;
+        }
         var x = 0, duration = 480, threshold = $this.width()*.2,
           isNext = event.gesture.deltaX<-threshold,
           isPrevious = event.gesture.deltaX>threshold;
@@ -139,7 +147,7 @@ require("bootstrapify");
         if (imageItems.length>2)
           previousImage.transition(transition);
 
-        setTimeout(function() {
+        dragTimeOutId = setTimeout(function() {
           var a = activeImage.get()[0];
           var b = nextImage.get()[0];
           var c = previousImage.get()[0];
@@ -292,6 +300,7 @@ require("bootstrapify");
       }
 
       function getImageSrc(img) {
+        if (typeof img.data() === "undefined") return;
         var maxWidth = $this.width(),
           imgData = img.data(),
           src = imgData.src;
