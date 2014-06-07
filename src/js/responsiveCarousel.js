@@ -38,6 +38,7 @@ require("bootstrapify");
         fitParentHeight: false,
         loadNextPrevious: true,
         reloadOnResize: true,
+        useCSSTransforms: true,
         autoplay: false,
         screenXs: 480,
         screenSm: 768,
@@ -58,6 +59,7 @@ require("bootstrapify");
         reloadOnResize = settings.reloadOnResize,
         stretch = settings.imgStretch,
         loadNextPrevious = settings.loadNextPrevious,
+        useCSSTransforms = settings.useCSSTransforms,
         SCREEN_XS = settings.screenXs,
         SCREEN_SM = settings.screenSm,
         SCREEN_MD = settings.screenMd,
@@ -76,7 +78,7 @@ require("bootstrapify");
       var element = hammerjs($this.get()[0]);
       var activeImage, index, nextIndex, previousIndex, nextImage, previousImage, dragTimeOutId = -1;
 
-      if (Modernizr.csstransforms) $this.addClass("transform-support");
+      if (Modernizr.csstransforms || useCSSTransforms) $this.addClass("transform-support");
 
       if (imageItems.length>1) {
         element.on("dragstart", onDragStart);
@@ -186,7 +188,7 @@ require("bootstrapify");
 
                 $this.trigger("slide.bs.carousel");
                 $this.trigger("slid.bs.carousel");
-                if (Modernizr.csstransforms) $this.addClass("transform-support");
+                if (Modernizr.csstransforms || useCSSTransforms) $this.addClass("transform-support");
               }
             });
           })
