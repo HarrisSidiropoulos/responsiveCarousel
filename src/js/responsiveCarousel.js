@@ -177,19 +177,23 @@ require("bootstrapify");
 
           requestAnimFrame(function() {
             requestAnimFrame(function() {
-              activeImage.removeClass("disable-transition");
-              nextImage.removeClass("disable-transition");
-              previousImage.removeClass("disable-transition");
-              activeImage = imagesContainer.find(".active");
-              index = activeImage.index();
-              if (isNext || isPrevious) {
-                $(".carousel-indicators .active").removeClass("active");
-                $(".carousel-indicators li").eq(index).addClass("active");
+              requestAnimFrame(function() {
+                requestAnimFrame(function() {
+                  activeImage.removeClass("disable-transition");
+                  nextImage.removeClass("disable-transition");
+                  previousImage.removeClass("disable-transition");
+                  activeImage = imagesContainer.find(".active");
+                  index = activeImage.index();
+                  if (isNext || isPrevious) {
+                    $(".carousel-indicators .active").removeClass("active");
+                    $(".carousel-indicators li").eq(index).addClass("active");
 
-                $this.trigger("slide.bs.carousel");
-                $this.trigger("slid.bs.carousel");
-                if (Modernizr.csstransforms || useCSSTransforms) $this.addClass("transform-support");
-              }
+                    $this.trigger("slide.bs.carousel");
+                    $this.trigger("slid.bs.carousel");
+                    if (Modernizr.csstransforms || useCSSTransforms) $this.addClass("transform-support");
+                  }
+                });
+              });
             });
           })
         }, duration);
