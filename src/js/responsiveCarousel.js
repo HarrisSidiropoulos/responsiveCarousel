@@ -76,7 +76,7 @@ require("bootstrapify");
       }
 
       var element = hammerjs($this.get()[0]);
-      var activeImage, index, nextIndex, previousIndex, nextImage, previousImage, dragTimeOutId = -1;
+      var activeImage, index, nextIndex, previousIndex, nextImage, previousImage, dragTimeOutId = -1, finishedDragTimeOutId=-1;
 
       if (useCSSTransforms) $this.addClass("transform-support");
 
@@ -87,6 +87,7 @@ require("bootstrapify");
       }
       function onDragStart(event) {
         clearTimeout(dragTimeOutId);
+        clearTimeout(finishedDragTimeOutId);
         $this.removeClass("transform-support");
         dragTimeOutId = -1;
         var imagesLength = imageItems.length;
@@ -112,6 +113,7 @@ require("bootstrapify");
 
       function onDrag(event) {
         clearTimeout(dragTimeOutId);
+        clearTimeout(finishedDragTimeOutId);
         dragTimeOutId = -1;
         var a = activeImage.get()[0];
         var b = nextImage.get()[0];
@@ -125,6 +127,7 @@ require("bootstrapify");
 
       function onDragEnd(event) {
         clearTimeout(dragTimeOutId);
+        clearTimeout(finishedDragTimeOutId);
         if (imagesContainer.find(".active").length===0) {
           return;
         }
@@ -175,27 +178,23 @@ require("bootstrapify");
           nextImage.removeClass("next");
           previousImage.removeClass("prev");
 
-          requestAnimFrame(function() {
-            requestAnimFrame(function() {
-              requestAnimFrame(function() {
-                requestAnimFrame(function() {
-                  activeImage.removeClass("disable-transition");
-                  nextImage.removeClass("disable-transition");
-                  previousImage.removeClass("disable-transition");
-                  activeImage = imagesContainer.find(".active");
-                  index = activeImage.index();
-                  if (isNext || isPrevious) {
-                    $(".carousel-indicators .active").removeClass("active");
-                    $(".carousel-indicators li").eq(index).addClass("active");
+          finishedDragTimeOutId = setTimeout(function() {
 
-                    $this.trigger("slide.bs.carousel");
-                    $this.trigger("slid.bs.carousel");
-                    if (useCSSTransforms) $this.addClass("transform-support");
-                  }
-                });
-              });
-            });
-          })
+            activeImage.removeClass("disable-transition");
+            nextImage.removeClass("disable-transition");
+            previousImage.removeClass("disable-transition");
+            activeImage = imagesContainer.find(".active");
+            index = activeImage.index();
+            if (isNext || isPrevious) {
+              $(".carousel-indicators .active").removeClass("active");
+              $(".carousel-indicators li").eq(index).addClass("active");
+
+              $this.trigger("slide.bs.carousel");
+              $this.trigger("slid.bs.carousel");
+              if (useCSSTransforms) $this.addClass("transform-support");
+            }
+
+          }, 64);
         }, duration);
       }
 
