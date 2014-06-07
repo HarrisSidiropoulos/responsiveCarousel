@@ -4,6 +4,7 @@
 var $ = require("jquery"),
     translate3d = require("css3-translate"),
     hammerjs = require("hammerjs"),
+    Modernizr = require("modernizrify"),
     requestAnimFrame = require("animationframe");
 
 require("jquery.transit");
@@ -75,6 +76,8 @@ require("bootstrapify");
       var element = hammerjs($this.get()[0]);
       var activeImage, index, nextIndex, previousIndex, nextImage, previousImage, dragTimeOutId = -1;
 
+      if (Modernizr.csstransforms) $this.addClass("transform-support");
+
       if (imageItems.length>1) {
         element.on("dragstart", onDragStart);
         element.on("drag", onDrag);
@@ -82,6 +85,7 @@ require("bootstrapify");
       }
       function onDragStart(event) {
         clearTimeout(dragTimeOutId);
+        $this.removeClass("transform-support");
         dragTimeOutId = -1;
         var imagesLength = imageItems.length;
         activeImage = imagesContainer.find(".active");
@@ -182,6 +186,7 @@ require("bootstrapify");
 
                 $this.trigger("slide.bs.carousel");
                 $this.trigger("slid.bs.carousel");
+                if (Modernizr.csstransforms) $this.addClass("transform-support");
               }
             });
           })

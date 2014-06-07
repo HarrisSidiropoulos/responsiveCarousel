@@ -7,23 +7,25 @@ html
     link(href='http://fonts.googleapis.com/css?family=Pinyon+Script', rel='stylesheet' type='text/css')
     link(rel="stylesheet", href="assets/css/main.css")
   body
-    - var width = 1140, height = 600;
+
+    - var width = 1140, height = 450;
     - var maxWidth = 992, ratio=maxWidth/width, mdWidth = Math.round(width * ratio), mdHeight = Math.round(height * ratio);
     - var maxWidth = 768, ratio=maxWidth/width, smWidth = Math.round(width * ratio), smHeight = Math.round(height * ratio);
     - var maxWidth = 480, ratio=maxWidth/width, xsWidth = Math.round(width * ratio), xsHeight = Math.round(height * ratio);
     - var imageTextColor = "FFF", imageBackgroundColor = "787678";
-    +carousel(
-      [
-        { caption: "Day 1", src: "//dummyimage.com/"+width+"x"+height+"/"+imageBackgroundColor+"/"+imageTextColor, mdSrc:"//dummyimage.com/"+mdWidth+"x"+mdHeight+"/"+imageBackgroundColor+"/"+imageTextColor, smSrc:"//dummyimage.com/"+smWidth+"x"+smHeight+"/"+imageBackgroundColor+"/"+imageTextColor, xsSrc:"//dummyimage.com/"+xsWidth+"x"+xsHeight+"/"+imageBackgroundColor+"/"+imageTextColor },
-        { caption: "Day 2", src: "//dummyimage.com/"+width+"x"+height+"/"+imageBackgroundColor+"/"+imageTextColor, mdSrc:"//dummyimage.com/"+mdWidth+"x"+mdHeight+"/"+imageBackgroundColor+"/"+imageTextColor, smSrc:"//dummyimage.com/"+smWidth+"x"+smHeight+"/"+imageBackgroundColor+"/"+imageTextColor, xsSrc:"//dummyimage.com/"+xsWidth+"x"+xsHeight+"/"+imageBackgroundColor+"/"+imageTextColor },
-        { caption: "Day 3", src: "//dummyimage.com/"+width+"x"+height+"/"+imageBackgroundColor+"/"+imageTextColor, mdSrc:"//dummyimage.com/"+mdWidth+"x"+mdHeight+"/"+imageBackgroundColor+"/"+imageTextColor, smSrc:"//dummyimage.com/"+smWidth+"x"+smHeight+"/"+imageBackgroundColor+"/"+imageTextColor, xsSrc:"//dummyimage.com/"+xsWidth+"x"+xsHeight+"/"+imageBackgroundColor+"/"+imageTextColor },
-        { caption: "Day 4", src: "//dummyimage.com/"+width+"x"+height+"/"+imageBackgroundColor+"/"+imageTextColor, mdSrc:"//dummyimage.com/"+mdWidth+"x"+mdHeight+"/"+imageBackgroundColor+"/"+imageTextColor, smSrc:"//dummyimage.com/"+smWidth+"x"+smHeight+"/"+imageBackgroundColor+"/"+imageTextColor, xsSrc:"//dummyimage.com/"+xsWidth+"x"+xsHeight+"/"+imageBackgroundColor+"/"+imageTextColor },
-      ],
-      {
-        backgroundScale: "cover",
-        //scaleBackgroundProportionally: "false",
-        //useIndicators: "false"
-      },
-      "fullscreen"
-      )
+    .container
+      +carousel(
+        [
+          { caption: "Day 1", src: "//dummyimage.com/"+width+"x"+height+"/"+imageBackgroundColor+"/"+imageTextColor, mdSrc:"//dummyimage.com/"+mdWidth+"x"+mdHeight+"/"+imageBackgroundColor+"/"+imageTextColor, smSrc:"//dummyimage.com/"+smWidth+"x"+smHeight+"/"+imageBackgroundColor+"/"+imageTextColor, xsSrc:"//dummyimage.com/"+xsWidth+"x"+xsHeight+"/"+imageBackgroundColor+"/"+imageTextColor },
+          { caption: "Day 2", src: "//dummyimage.com/"+width+"x"+height+"/"+imageBackgroundColor+"/"+imageTextColor, mdSrc:"//dummyimage.com/"+mdWidth+"x"+mdHeight+"/"+imageBackgroundColor+"/"+imageTextColor, smSrc:"//dummyimage.com/"+smWidth+"x"+smHeight+"/"+imageBackgroundColor+"/"+imageTextColor, xsSrc:"//dummyimage.com/"+xsWidth+"x"+xsHeight+"/"+imageBackgroundColor+"/"+imageTextColor },
+          { caption: "Day 3", src: "//dummyimage.com/"+width+"x"+height+"/"+imageBackgroundColor+"/"+imageTextColor, mdSrc:"//dummyimage.com/"+mdWidth+"x"+mdHeight+"/"+imageBackgroundColor+"/"+imageTextColor, smSrc:"//dummyimage.com/"+smWidth+"x"+smHeight+"/"+imageBackgroundColor+"/"+imageTextColor, xsSrc:"//dummyimage.com/"+xsWidth+"x"+xsHeight+"/"+imageBackgroundColor+"/"+imageTextColor },
+          { caption: "Day 4", src: "//dummyimage.com/"+width+"x"+height+"/"+imageBackgroundColor+"/"+imageTextColor, mdSrc:"//dummyimage.com/"+mdWidth+"x"+mdHeight+"/"+imageBackgroundColor+"/"+imageTextColor, smSrc:"//dummyimage.com/"+smWidth+"x"+smHeight+"/"+imageBackgroundColor+"/"+imageTextColor, xsSrc:"//dummyimage.com/"+xsWidth+"x"+xsHeight+"/"+imageBackgroundColor+"/"+imageTextColor },
+        ],
+        {
+          backgroundScale: "cover",
+          //scaleBackgroundProportionally: "false",
+          //useIndicators: "false"
+        },
+        "fullscreen"
+        )
     script(src="assets/js/main.js")

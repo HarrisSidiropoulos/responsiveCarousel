@@ -81,3 +81,44 @@ $carousel-media-control-background-color-hover: #333 !default;
     opacity: .5;
   }
 }
+
+.carousel-inner.transform-support {
+  > .item {
+    transition: .6s ease-in-out transform;
+  }
+
+  > .active {
+    transform: translateX(0px) !important;
+  }
+
+  > .next,
+  > .prev {
+    position: absolute !important;
+    top: 0;
+    width: 100%;
+  }
+
+  > .next {
+    transform: translateX(100%) !important;
+    left: 0px !important;
+  }
+  > .prev {
+    transform: translateX(-100%) !important;
+    left: 0px !important;
+  }
+  > .next.left,
+  > .prev.right {
+    transform: translateX(0px) !important;
+    left: 0px !important;
+  }
+
+  > .active.left {
+    transform: translateX(-100%) !important;
+    left: 0px !important;
+  }
+  > .active.right {
+    transform: translateX(100%) !important;
+    left: 0px !important;
+  }
+
+}
