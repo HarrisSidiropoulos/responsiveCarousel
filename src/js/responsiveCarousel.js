@@ -132,7 +132,7 @@ require("bootstrapify");
         if (imagesContainer.find(".active").length===0) {
           return;
         }
-        var x = 0, duration = 600, threshold = $this.width()*.2,
+        var x = 0, duration = 480, threshold = $this.width()*.2,
           isNext = event.gesture.deltaX<-threshold,
           isPrevious = event.gesture.deltaX>threshold;
         if (imageItems.length===2) {
