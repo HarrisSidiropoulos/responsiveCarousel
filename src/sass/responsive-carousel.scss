@@ -99,11 +99,11 @@ $carousel-media-control-background-color-hover: #333 !default;
     }
 
     > .next {
-      transform: translateX(100%) !important;
+      transform: translateX(99%) !important;
       left: 0px !important;
     }
     > .prev {
-      transform: translateX(-100%) !important;
+      transform: translateX(-99%) !important;
       left: 0px !important;
     }
     > .next.left,
@@ -113,11 +113,11 @@ $carousel-media-control-background-color-hover: #333 !default;
     }
 
     > .active.left {
-      transform: translateX(-100%) !important;
+      transform: translateX(-99%) !important;
       left: 0px !important;
     }
     > .active.right {
-      transform: translateX(100%) !important;
+      transform: translateX(99%) !important;
       left: 0px !important;
     }
 

@@ -118,10 +118,11 @@ require("bootstrapify");
         var a = activeImage.get()[0];
         var b = nextImage.get()[0];
         var c = previousImage.get()[0];
+        var x = Math.round(event.gesture.deltaX);
+        translate3d.x(a, x);
+        translate3d.x(b, x);
+        translate3d.x(c, x);
 
-        translate3d.x(a, event.gesture.deltaX);
-        translate3d.x(b, event.gesture.deltaX);
-        translate3d.x(c, event.gesture.deltaX);
         if (event.gesture) event.gesture.preventDefault();
       }
 
@@ -131,7 +132,7 @@ require("bootstrapify");
         if (imagesContainer.find(".active").length===0) {
           return;
         }
-        var x = 0, duration = 480, threshold = $this.width()*.2,
+        var x = 0, duration = 600, threshold = $this.width()*.2,
           isNext = event.gesture.deltaX<-threshold,
           isPrevious = event.gesture.deltaX>threshold;
         if (imageItems.length===2) {
@@ -152,9 +153,14 @@ require("bootstrapify");
         transition[rule] = "translate3d("+x+"px, 0px, 0px)";
 
         activeImage.transition(transition);
+        translate3d.x(nextImage.get()[0], Math.round(event.gesture.deltaX)-1);
+        transition[rule] = "translate3d("+(x-1)+"px, 0px, 0px)";
         nextImage.transition(transition);
-        if (imageItems.length>2)
+        if (imageItems.length>2) {
+          translate3d.x(previousImage.get()[0], Math.round(event.gesture.deltaX)+1);
+          transition[rule] = "translate3d("+(x+1)+"px, 0px, 0px)";
           previousImage.transition(transition);
+        }
 
         dragTimeOutId = setTimeout(function() {
           var a = activeImage.get()[0];
