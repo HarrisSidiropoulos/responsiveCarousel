@@ -2,10 +2,10 @@
  responsiveCarousel
  */
 var $ = require("jquery"),
-    translate3d = require("css3-translate"),
-    hammerjs = require("hammerjs"),
-    Modernizr = require("modernizrify"),
-    requestAnimFrame = require("animationframe");
+  translate3d = require("css3-translate"),
+  hammerjs = require("hammerjs"),
+  Modernizr = require("modernizrify"),
+  requestAnimFrame = require("animationframe");
 
 require("jquery.transit");
 require("bootstrapify");
@@ -35,6 +35,7 @@ require("bootstrapify");
         backgroundScale: false,
         scaleBackgroundProportionally: true,
         imgStretch: true,
+        autoResize: true,
         fitParentHeight: false,
         loadNextPrevious: true,
         reloadOnResize: true,
@@ -52,6 +53,7 @@ require("bootstrapify");
         carouselMediaControls = $this.find(".carousel-media-control a"),
         imageItems = $this.find(".carousel-inner .item img"),
         carouselWidth = $this.width(),
+        autoResize = settings.autoResize,
         maxImageWidth = settings.maxImageWidth,
         maxImageHeight = settings.maxImageHeight,
         backgroundScale = settings.backgroundScale,
@@ -214,12 +216,13 @@ require("bootstrapify");
         });
       }
       function resizeCarousel() {
-        if (stretch) {
+
+        if (stretch && autoResize) {
           imageItems.each(function() {
             $(this).width($(this).parent().parent().width());
           });
         }
-        if (backgroundScale && scaleBackgroundProportionally) {
+        if (backgroundScale && scaleBackgroundProportionally && autoResize) {
           var stretchValue = stretch ? 10 : 1;
           var dimensions = getAspectRatioDimensions(maxImageWidth*stretchValue, maxImageHeight*stretchValue, $this.width());
           imageItems.each(function() {
@@ -259,7 +262,7 @@ require("bootstrapify");
           loadImage(img);
           if (loadNextPrevious) {
             var nextImage = $(imageItems[nextIndex]),
-                previousImage = $(imageItems[previousIndex]);
+              previousImage = $(imageItems[previousIndex]);
 
             loadImage(nextImage);
             loadImage(previousImage);
@@ -363,7 +366,7 @@ require("bootstrapify");
         img.css("height", "inherit");
       }
 
-       function getAspectRatioDimensions(width, height, maxWidth, maxHeight) {
+      function getAspectRatioDimensions(width, height, maxWidth, maxHeight) {
         maxHeight = typeof maxHeight === "undefined" ? height : maxHeight;
         var ratio = 0;  // Used for aspect ratio
         // Check if the current width is larger than the max
