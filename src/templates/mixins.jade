@@ -32,7 +32,7 @@ mixin carousel(images, options, classes)
             div.carousel-media-control
               a(href="#", data-media-type=img.mediaType || "vimeo", data-media-src=img.mediaSrc)
                 span.glyphicon.glyphicon-play
-          img(data-src=typeof img === "string" ? img : img.src,
+          img(data-src=(typeof img === "string" ? img : img.src),
           data-md-src=img.mdSrc?img.mdSrc:"",
           data-sm-src=img.smSrc?img.smSrc:"",
           data-xs-src=img.xsSrc?img.xsSrc:"")
