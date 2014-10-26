@@ -33,6 +33,7 @@ require("bootstrapify");
         maxImageWidth: 0,
         maxImageHeight: 0,
         backgroundScale: false,
+        touchEnabled: true,
         scaleBackgroundProportionally: true,
         imgStretch: true,
         autoResize: true,
@@ -82,7 +83,7 @@ require("bootstrapify");
 
       if (useCSSTransforms) $this.addClass("transform-support");
 
-      if (imageItems.length>1) {
+      if (imageItems.length>1 && settings.touchEnabled) {
         element.on("dragstart", onDragStart);
         element.on("drag", onDrag);
         element.on("dragend", onDragEnd);
