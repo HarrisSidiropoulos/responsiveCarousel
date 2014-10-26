@@ -54,6 +54,7 @@ require("bootstrapify");
         carouselMediaControls = $this.find(".carousel-media-control a"),
         imageItems = $this.find(".carousel-inner .item img"),
         carouselWidth = $this.width(),
+        touchEnabled = settings.touchEnabled && !$this.hasClass("carousel-thumbs"),
         autoResize = settings.autoResize,
         maxImageWidth = settings.maxImageWidth,
         maxImageHeight = settings.maxImageHeight,
@@ -83,7 +84,7 @@ require("bootstrapify");
 
       if (useCSSTransforms) $this.addClass("transform-support");
 
-      if (imageItems.length>1 && settings.touchEnabled) {
+      if (imageItems.length>1 && touchEnabled) {
         element.on("dragstart", onDragStart);
         element.on("drag", onDrag);
         element.on("dragend", onDragEnd);
